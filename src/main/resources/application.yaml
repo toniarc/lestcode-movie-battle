@@ -1,0 +1,38 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /movie-battle
+  error:
+    include-stacktrace: never
+
+spring:
+  h2:
+    console.enabled: true
+  jpa:
+    defer-datasource-initialization: true
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:customdb
+  hibernate:
+    ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/letscode
+          jwk-set-uri: http://localhost:8080/realms/letscode/protocol/openid-connect/certs    
+    
+module-name: movie-battle
+api-version: 1.0
+
+springdoc:
+  swagger-ui:
+    oauth:
+      clientId: movie-battle
+      clientSecret: IxlVqmOlyz4pSiosyfrluEwPqaw8Fv5E
+  oAuthFlow:
+    authorizationUrl: http://localhost:8080/realms/letscode/protocol/openid-connect/auth
+    tokenUrl: http://localhost:8080/realms/letscode/protocol/openid-connect/token
+    use-pkce-with-authorization-code-grant: true
+
+    
