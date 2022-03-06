@@ -3,15 +3,15 @@
 
 ## Descrição
 
-	A aplicação consiste em uma api rest de jogo onde são exibidos dois filmes a cada rodada e o usuário tem que adivinhar qual deles possui a maior nota de acordo com o imdb (https://www.imdb.com). Para isso, a api conta com os seguintes endpoints:
+A aplicação consiste em uma api rest de jogo onde são exibidos dois filmes a cada rodada e o usuário tem que adivinhar qual deles possui a maior nota de acordo com o imdb (https://www.imdb.com). Para isso, a api conta com os seguintes endpoints:
 	
-	POST /matches - inicia uma nova partida e como resposta exibe a rodada inicial de filmes
+- POST /matches - inicia uma nova partida e como resposta exibe a rodada inicial de filmes
 	
-	GET /matches/rounds/current - exibe a os filmes (filme A e filme B) da rodada atual
+- GET /matches/rounds/current - exibe a os filmes (filme A e filme B) da rodada atual
 	
-	POST /matches/rounds/current/guess - permite que o usuário envie o seu palpite sobre qual filme tem a maior pontuação na rodada atual. Somente os valores 'A' e 'B' são permitidos como respostas válidas.
+- POST /matches/rounds/current/guess - permite que o usuário envie o seu palpite sobre qual filme tem a maior pontuação na rodada atual. Somente os valores 'A' e 'B' são permitidos como respostas válidas.
 	
-	DELETE /movie-battle/matches - encerra uma partida
+- DELETE /movie-battle/matches - encerra uma partida
 
 ## Configuração do ambiente
 
@@ -21,33 +21,33 @@
 	
 2 - Crie um novo reaml.
 
-![image info](/home/antoniojunior/Imagens/keycloak/step01-add-reaml.png)
+![image info](static/step01-add-reaml.png)
 
 3 - Crie um novo client chamado 'movie-battle'
 
-![image info](/home/antoniojunior/Imagens/keycloak/step02-1-add-client.png)
+![image info](static/step02-1-add-client.png)
 
-![image info](/home/antoniojunior/Imagens/keycloak/step02-2-add-client.png)
+![image info](static/step02-2-add-client.png)
 
 4 - No formulário que aparecerá em seguida, preencha de acordo com a imagem abaixo e depois clique no botão 'Save':
 
-![image info](/home/antoniojunior/Imagens/keycloak/step02-3-add-client.png)
+![image info](static/step02-3-add-client.png)
 
 5 - Criando os usuários da aplicação:
 
-![image info](/home/antoniojunior/Imagens/keycloak/step03-1-create-user.png)
+![image info](static/step03-1-create-user.png)
 
-![image info](/home/antoniojunior/Imagens/keycloak/step03-2-create-user.png)
+![image info](static/step03-2-create-user.png)
 
-![image info](/home/antoniojunior/Imagens/keycloak/step03-3-create-user.png)
+![image info](static/step03-3-create-user.png)
 
 Obs.: Você pode criar quantos usuários quiser, mas o usuário 'testuser' com a senha '123456' será necessário para rodar os testes de integração.
 
 6 - Obtendo a secret key do client:
 
-![image info](/home/antoniojunior/Imagens/keycloak/step04-1-get-secret-client.png)
+![image info](static/step04-1-get-secret-client.png)
 
-![image info](/home/antoniojunior/Imagens/keycloak/step04-2-get-secret-client.png)
+![image info](static/step04-2-get-secret-client.png)
 
 Obs: Salve este secret pois ele será usado na aplicação.
 
