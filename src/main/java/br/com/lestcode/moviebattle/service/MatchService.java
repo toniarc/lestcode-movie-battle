@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.lestcode.moviebattle.dto.MatchStatusDto;
 import br.com.lestcode.moviebattle.dto.RankinkDto;
+import br.com.lestcode.moviebattle.dto.RoundDto;
 import br.com.lestcode.moviebattle.dto.UserGuessDto;
 import br.com.lestcode.moviebattle.exception.MatchInProgressException;
 import br.com.lestcode.moviebattle.exception.NoMatchInProgressException;
+import br.com.lestcode.moviebattle.mapper.RoundMapper;
 import br.com.lestcode.moviebattle.model.Match;
 import br.com.lestcode.moviebattle.model.MatchStatus;
 import br.com.lestcode.moviebattle.model.Round;
@@ -33,7 +35,7 @@ public class MatchService {
 	private final MatchRepository matchRepository;
 	private final User user;
 	
-	public Round startMatch() {
+	public RoundDto startMatch() {
 		
 		Match currentMatch = matchRepository.findByUserAndStatus(user.getUserName(), MatchStatus.RUNNING);
 		
@@ -45,7 +47,7 @@ public class MatchService {
 		
 		matchRepository.save(match);
 		
-		return match.getCurrentRound();
+		return RoundMapper.INSTANCE.map(match.getCurrentRound());
 	}
 
 	private Match getCurrentMatch(String userName) {
@@ -96,9 +98,9 @@ public class MatchService {
 		return matchStatus;
 	}
 
-	public Round getCurrentRound() {
+	public RoundDto getCurrentRound() {
 		Match currentMatch = getCurrentMatch(user.getUserName());
-		return currentMatch.getCurrentRound();
+		return RoundMapper.INSTANCE.map(currentMatch.getCurrentRound());
 	}
 
 	public MatchStatusDto checkAnwswer(UserGuessDto userGuess) {

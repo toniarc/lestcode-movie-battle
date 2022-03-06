@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
@@ -26,6 +27,12 @@ import io.restassured.response.Response;
 @TestMethodOrder(OrderAnnotation.class)
 public class MatchServiceTest {
 
+	@Value("${realm-name}")
+	private String realmName;
+	
+	@Value("${client-secret}")
+	private String clientSecret;
+	
 	@Test
 	public void userNotAuthenticatedTest() {
 		
@@ -141,17 +148,15 @@ public class MatchServiceTest {
 	}
 	
 	private String getToken() {
-        String authorization = encode("antonio.junior", "123456");
 
         Response response = RestAssured.given()
-        		.header("authorization", "Basic " + authorization)
                 .contentType(ContentType.URLENC)
                 .formParam("client_id", "movie-battle")
-                .formParam("username","antonio.junior")
+                .formParam("username","testuser")
                 .formParam("password", "123456")
                 .formParam("grant_type", "password")
-                .formParam("client_secret", "IxlVqmOlyz4pSiosyfrluEwPqaw8Fv5E")
-              .post("http://localhost:8080/realms/letscode/protocol/openid-connect/token")
+                .formParam("client_secret", clientSecret)
+              .post("http://localhost:8080/realms/"+realmName+"/protocol/openid-connect/token")
               .then()
                 .statusCode(200)
                 .extract()
@@ -229,7 +234,4 @@ public class MatchServiceTest {
 			.response();
 	}
 	
-	public static String encode(String str1, String str2) {
-        return new String(Base64.getEncoder().encode((str1 + ":" + str2).getBytes()));
-    }
 }

@@ -19,8 +19,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/letscode
-          jwk-set-uri: http://localhost:8080/realms/letscode/protocol/openid-connect/certs    
+          issuer-uri: http://localhost:8080/realms/${realm-name}
+          jwk-set-uri: http://localhost:8080/realms/${realm-name}/protocol/openid-connect/certs    
     
 module-name: movie-battle
 api-version: 1.0
@@ -29,10 +29,10 @@ springdoc:
   swagger-ui:
     oauth:
       clientId: movie-battle
-      clientSecret: IxlVqmOlyz4pSiosyfrluEwPqaw8Fv5E
+      clientSecret: ${client-secret}
   oAuthFlow:
-    authorizationUrl: http://localhost:8080/realms/letscode/protocol/openid-connect/auth
-    tokenUrl: http://localhost:8080/realms/letscode/protocol/openid-connect/token
+    authorizationUrl: http://localhost:8080/realms/${realm-name}/protocol/openid-connect/auth
+    tokenUrl: http://localhost:8080/realms/letscode/${realm-name}/openid-connect/token
     use-pkce-with-authorization-code-grant: true
 
     

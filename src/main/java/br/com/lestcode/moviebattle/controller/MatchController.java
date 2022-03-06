@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lestcode.moviebattle.dto.MatchStatusDto;
 import br.com.lestcode.moviebattle.dto.RankinkDto;
+import br.com.lestcode.moviebattle.dto.RoundDto;
 import br.com.lestcode.moviebattle.dto.UserGuessDto;
-import br.com.lestcode.moviebattle.model.Round;
 import br.com.lestcode.moviebattle.service.MatchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,35 +27,35 @@ public class MatchController {
 
 	private final MatchService service;
 	
-	@PreAuthorize("hasRole('User')") 
+	//@PreAuthorize("hasRole('User')") 
 	@Operation(summary = "Inicia uma nova partida", security = @SecurityRequirement(name = "security_auth"))
 	@PostMapping
-	public Round startMatch() {
+	public RoundDto startMatch() {
 		return service.startMatch();
 	}
 	
-	@PreAuthorize("hasRole('User')")
+	//@PreAuthorize("hasRole('User')")
 	@Operation(summary = "Retorna a rodada atual", security = @SecurityRequirement(name = "security_auth"))
 	@GetMapping("/rounds/current")
-	public Round getCurrentRound() {
+	public RoundDto getCurrentRound() {
 		return service.getCurrentRound();
 	}
 	
-	@PreAuthorize("hasRole('User')")
+	//@PreAuthorize("hasRole('User')")
 	@Operation(summary = "Avalia o palpite do usuário para a rodada atual", security = @SecurityRequirement(name = "security_auth"))
 	@PostMapping("/rounds/current/guess")
 	public MatchStatusDto getCurrentRound(@RequestBody UserGuessDto userGuess) {
 		return service.checkAnwswer(userGuess);
 	}
 	
-	@PreAuthorize("hasRole('User')")
+	//@PreAuthorize("hasRole('User')")
 	@Operation(summary = "Encerra uma partida", security = @SecurityRequirement(name = "security_auth"))
 	@DeleteMapping
 	public MatchStatusDto endMatch() {
 		return service.endMatch();
 	}
 	
-	@PreAuthorize("hasRole('User')")
+	//@PreAuthorize("hasRole('User')")
 	@Operation(summary = "Lista o ranking dos usuários", security = @SecurityRequirement(name = "security_auth"))
 	@GetMapping("/ranking")
 	public List<RankinkDto> getRanking() {

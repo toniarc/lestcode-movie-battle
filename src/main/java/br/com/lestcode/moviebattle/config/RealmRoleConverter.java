@@ -11,9 +11,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 public class RealmRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
-    @Override
+    
+	@Override
+    @SuppressWarnings("unchecked")
     public Collection<GrantedAuthority> convert(Jwt jwt) {
-        final Map<String, List<String>> realmAccess = (Map<String, List<String>>) jwt.getClaims().get("realm_access");
+		final Map<String, List<String>> realmAccess = (Map<String, List<String>>) jwt.getClaims().get("realm_access");
         return  realmAccess.get("roles").stream()
                 .map(roleName -> "ROLE_" + roleName)
                 .map(SimpleGrantedAuthority::new)
